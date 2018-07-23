@@ -3,7 +3,8 @@
 " ******************************************************************************
 
 " the color sheme, dumbass
-silent! colorscheme vividchalk
+set background=light
+silent! colorscheme solarized
 
 " enable color syntax highlighting
 syntax on
@@ -57,7 +58,7 @@ set omnifunc=syntaxcomplete#Complete
 set regexpengine=1
 
 " show the relative line number
-set relativenumber
+" set relativenumber
 
 " scroll buffer
 set scrolloff=10

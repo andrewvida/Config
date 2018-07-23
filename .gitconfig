@@ -14,7 +14,7 @@
   hist        = log --pretty=format:\"%Cred%h%Creset %ad | %s%d %C(bold blue)[%an]%Creset %Cgreen(%cr)%Creset\" --graph --date=short
   last        = !git hist -1
   lgrep       = grep --heading --break
-  me          = !git hist --author=michael@sage.house
+  me          = !git hist --author=andrewjvida@gmail.com
   sha         = !git rev-parse HEAD | cut -c -8 | tr -d '\n' | pbcopy
   st          = status
   this        = !git init && git add . && git commit -m 'Initial commit'
@@ -28,13 +28,15 @@
 [credential]
   helper = osxkeychain
 [heroku]
-  account = sagehouse
+  account = personal
 [pull]
   rebase = true
 [user]
-  name  = Michael Joseph Kramer
-  email = michael@sage.house
+  name  = Andrew Vida
+  email = andrewjvida@gmail.com
 [grep]
   lineNumber = true
   extendRegexp = true
   fullName = true
+[rebase]
+	autoStash = true

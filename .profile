@@ -1,1 +1,1 @@
-[ -r /Users/Michael/.bashrc ] && source /Users/Michael/.bashrc
+[ -r /Users/andrewvida/.bashrc ] && source /Users/andrewvida/.bashrc

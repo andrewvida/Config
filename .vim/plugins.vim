@@ -18,7 +18,7 @@ Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'sheerun/vim-polyglot'
-Plug 'SirVer/ultisnips' 
+Plug 'SirVer/ultisnips'
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -67,8 +67,8 @@ augroup ale_highlights
   autocmd!
   autocmd ColorScheme * highlight ALEError ctermbg=88
   autocmd ColorScheme * highlight ALEErrorSign ctermfg=196
-  autocmd ColorScheme * highlight ALEWarning ctermbg=8
-  autocmd ColorScheme * highlight ALEWarningSign ctermfg=226
+  autocmd ColorScheme * highlight ALEWarning ctermbg=none cterm=underline
+  autocmd ColorScheme * highlight ALEWarningSign ctermfg=208
 augroup end
 
 " add vim-airline integration
