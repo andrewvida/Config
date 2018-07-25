@@ -15,17 +15,16 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'honza/vim-snippets'
 Plug 'lifepillar/vim-mucomplete'
+Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'sheerun/vim-polyglot'
 Plug 'SirVer/ultisnips'
-Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vividchalk'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
@@ -140,6 +139,25 @@ autocmd VimEnter * silent! RainbowParentheses
 
 " add the [] and {}
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+" ******************************************************************************
+" TABULAR
+" ******************************************************************************
+
+if exists(':Tabularize')
+  AddTabularPattern! symbols         / :/l0
+  AddTabularPattern! hash            /^[^>]*\zs=>/
+  AddTabularPattern! chunks          / \S\+/l0
+  AddTabularPattern! assignment      / = /l0
+  AddTabularPattern! comma           /^[^,]*,/l1
+  AddTabularPattern! colon           /:\zs /l0
+  AddTabularPattern! options_hashes  /:\w\+ =>/
+
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
 
 " ******************************************************************************
 " TAGBAR
