@@ -57,9 +57,6 @@ set omnifunc=syntaxcomplete#Complete
 " use the legacy regex engine - improves ruby syntax highlighting performance
 set regexpengine=1
 
-" show the relative line number
-" set relativenumber
-
 " scroll buffer
 set scrolloff=10
 
