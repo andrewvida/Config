@@ -22,6 +22,7 @@ Plug 'SirVer/ultisnips'
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vividchalk'
@@ -50,9 +51,6 @@ let g:ale_fixers = {
       \  '*': [
       \   'remove_trailing_lines',
       \   'trim_whitespace',
-      \  ],
-      \  'elixir': [
-      \   'mix_format',
       \  ],
       \  'javascript': [
       \   'eslint',
