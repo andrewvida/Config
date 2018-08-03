@@ -19,7 +19,6 @@ Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'sheerun/vim-polyglot'
-Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
@@ -169,15 +168,6 @@ nnoremap <silent> <F8> :TagbarToggle<CR>
 
 " hide line numbers
 let g:tagbar_show_linenumbers = 0
-
-" ******************************************************************************
-" ULTISNIPS
-" ******************************************************************************
-
-" trigger mappings
-let g:UltiSnipsExpandTrigger       = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 
 " ******************************************************************************
 " VIM-AIRLINE
