@@ -22,6 +22,8 @@ alias mux=tmuxinator
 
 # Custom aliases
 alias lsa="ls -al"
+alias bi="bundle install"
+alias be="bundle exec"
 
 # Editor
 export EDITOR="/usr/local/bin/vim"
