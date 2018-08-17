@@ -9,7 +9,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'godlygeek/tabular', { 'on': 'Tab' }
-Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestLast', 'TestLast', 'TestSuite'] }
+Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -18,6 +18,7 @@ Plug 'lifepillar/vim-mucomplete'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'ntpeters/vim-airline-colornum'
+Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fireplace'
@@ -93,6 +94,24 @@ nnoremap <silent> <Leader>s :Snippets<CR>
 " map Tags command
 nnoremap <silent> <Leader>c :Tags<CR>
 
+" map custom Rg command
+nnoremap <silent> <Leader>r :Rg<CR>
+
+" use ripgrep for search
+command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \   <bang>0)
+
+" use ripgrep for full-line completion
+inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
+  \ 'prefix': '^.*$',
+  \ 'source': 'rg -n ^ --color always',
+  \ 'options': '--ansi --delimiter : --nth 3..',
+  \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
+
 " ******************************************************************************
 " INDENTLINE
 " ******************************************************************************
@@ -113,7 +132,8 @@ let g:mucomplete#always_use_completeopt = 0
 " cycle with tab instead of selection
 let g:mucomplete#cycle_with_trigger = 1
 
-imap <right> <plug>(MUcompleteExtendFwd)
+" extend current completion
+imap <expr> <down> mucomplete#extend_fwd("\<down>")
 
 " add completion chain
 let g:mucomplete#chains = {
@@ -121,10 +141,9 @@ let g:mucomplete#chains = {
       \    'ulti',
       \    "c-p",
       \    "c-n",
-      \    'omni',
       \    'tags',
+      \    'omni',
       \    'incl',
-      \    'line',
       \    'file',
       \    'path',
       \   ],
