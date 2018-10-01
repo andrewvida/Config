@@ -118,11 +118,11 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " FONT
 " ******************************************************************************
 
-" bold comments
-highlight htmlarg cterm=bold
+" italic comments
+highlight htmlarg cterm=italic
 
 " bold html arguments
-highlight comment cterm=bold
+highlight comment cterm=italic
 
 " ******************************************************************************
 " SEARCH
