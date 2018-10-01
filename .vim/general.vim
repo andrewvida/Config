@@ -161,11 +161,7 @@ set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸▸
 " NUMBERING
 " ******************************************************************************
 
-augroup numbering
-  autocmd!
-  autocmd InsertEnter * set norelativenumber
-  autocmd InsertLeave * set relativenumber
-augroup end
+set norelativenumber
 
 " ******************************************************************************
 " TABS
