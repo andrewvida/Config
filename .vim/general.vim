@@ -10,18 +10,13 @@ silent! colorscheme solarized
 syntax on
 
 " change the background color of the autocomplete menu
-highlight Pmenu guibg=#d78700 ctermbg=172
+highlight Pmenu ctermbg=172 gui=bold
 
 " change the select backgroud color of the autocomplete menu
-highlight PmenuSel guibg=#8700d7 ctermbg=92
+highlight PmenuSel ctermbg=92 gui=bold
 
 " change the sign column backgroud color
-highlight SignColumn guibg=black ctermbg=black
-
- " turn on true colors
- let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
- let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
- set termguicolors
+highlight SignColumn ctermbg=black
 
 " ******************************************************************************
 " BASICS
@@ -122,11 +117,11 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " FONT
 " ******************************************************************************
 
-" italic comments
-highlight htmlarg cterm=italic
+" bold comments
+highlight htmlarg cterm=bold
 
-" italic html arguments
-highlight comment cterm=italic
+" bold html arguments
+highlight comment cterm=bold
 
 " ******************************************************************************
 " SEARCH
@@ -165,7 +160,11 @@ set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸▸
 " NUMBERING
 " ******************************************************************************
 
-set norelativenumber
+augroup numbering
+  autocmd!
+  autocmd InsertEnter * set norelativenumber
+  autocmd InsertLeave * set relativenumber
+augroup end
 
 " ******************************************************************************
 " TABS
