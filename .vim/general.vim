@@ -4,8 +4,7 @@
 
 " the color sheme, dumbass
 set background=light
-silent! colorscheme solarized8_flat
-set termguicolors
+silent! colorscheme solarized
 
 " enable color syntax highlighting
 syntax on
