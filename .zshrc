@@ -46,6 +46,8 @@ plugins=(bundler chruby git nvm rails tmuxinator rake)
 
 source $ZSH/oh-my-zsh.sh
 
+export PATH="/usr/local/bin:$PATH"
+
 # Tmuxinator configuration
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 export EDITOR=vim
@@ -63,9 +65,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 export NVM_DIR="/Users/andrewvida/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# An alias Zach Briggs thought I needed
-alias fucking=sudo
 
 # Add fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
