@@ -8,15 +8,17 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'flazz/vim-colorschemes'
+Plug 'godlygeek/tabular'
 Plug 'godlygeek/tabular', { 'on': 'Tab' }
+Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'honza/vim-snippets'
 Plug 'lifepillar/vim-mucomplete'
-Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
@@ -29,7 +31,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " ******************************************************************************
@@ -199,7 +200,7 @@ let g:airline_powerline_fonts = 1
 let g:airline_skip_empty_sections = 1
 
 " set the airline theme
-let g:airline_theme = 'light'
+let g:airline_theme = 'dark'
 
 " ******************************************************************************
 " VIM-FUGITIVE

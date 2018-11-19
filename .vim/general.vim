@@ -3,8 +3,8 @@
 " ******************************************************************************
 
 " the color sheme, dumbass
-set background=light
-silent! colorscheme solarized
+set background=dark
+colorscheme gruvbox
 
 " enable color syntax highlighting
 syntax on
