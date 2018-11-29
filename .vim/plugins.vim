@@ -14,10 +14,11 @@ Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/indentLine'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'ntpeters/vim-airline-colornum'
+Plug 'itchyny/lightline.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -26,8 +27,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 call plug#end()
 
@@ -67,9 +66,6 @@ augroup ale_highlights
   autocmd ColorScheme * highlight ALEWarning ctermbg=none cterm=underline
   autocmd ColorScheme * highlight ALEWarningSign ctermfg=208
 augroup end
-
-" add vim-airline integration
-let g:airline#extensions#ale#enabled = 1
 
 " ******************************************************************************
 " FZF.VIM
@@ -186,19 +182,6 @@ nnoremap <silent> <F8> :TagbarToggle<CR>
 
 " hide line numbers
 let g:tagbar_show_linenumbers = 0
-
-" ******************************************************************************
-" VIM-AIRLINE
-" ******************************************************************************
-
-" add fancy glyphs -- requires a powerline font
-let g:airline_powerline_fonts = 1
-
-" hide empty trailing sections
-let g:airline_skip_empty_sections = 1
-
-" set the airline theme
-let g:airline_theme = 'dark'
 
 " ******************************************************************************
 " VIM-FUGITIVE
