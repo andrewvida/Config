@@ -117,15 +117,6 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 
-" ******************************************************************************
-" FONT
-" ******************************************************************************
-
-" italic comments
-highlight htmlarg cterm=italic
-
-" bold html arguments
-highlight comment cterm=italic
 
 " ******************************************************************************
 " SEARCH
