@@ -8,17 +8,17 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
 Plug 'godlygeek/tabular', { 'on': 'Tab' }
 Plug 'honza/vim-snippets'
+Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'itchyny/lightline.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -116,6 +116,21 @@ let g:indentLine_char = '┊'
 
 " exclude json and sh files
 let g:indentLine_fileTypeExclude = ['json', 'sh']
+
+" ******************************************************************************
+" LIGHTLINE
+" ******************************************************************************
+
+let g:lightline = {
+      \ 'colorscheme': 'default',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 " ******************************************************************************
 " MUCOMPLETE
