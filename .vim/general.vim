@@ -3,8 +3,8 @@
 " ******************************************************************************
 
 " the color sheme, dumbass
+colorscheme default
 set background=dark
-colorscheme gruvbox
 
 " enable color syntax highlighting
 syntax on

@@ -8,7 +8,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'flazz/vim-colorschemes'
 Plug 'godlygeek/tabular'
 Plug 'godlygeek/tabular', { 'on': 'Tab' }
 Plug 'honza/vim-snippets'
@@ -18,7 +17,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
