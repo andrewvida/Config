@@ -67,6 +67,9 @@ augroup ale_highlights
   autocmd ColorScheme * highlight ALEWarningSign ctermfg=208
 augroup end
 
+" add vim-airline integration
+let g:airline#extensions#ale#enabled = 1
+
 " ******************************************************************************
 " FZF.VIM
 " ******************************************************************************
