@@ -83,9 +83,6 @@ nnoremap <silent> <Leader>f :Files<CR>
 " map Lines command
 nnoremap <silent> <Leader>l :Lines<CR>
 
-" map Snippets command
-nnoremap <silent> <Leader>s :Snippets<CR>
-
 " map Tags command
 nnoremap <silent> <Leader>c :Tags<CR>
 
@@ -148,7 +145,6 @@ imap <expr> <down> mucomplete#extend_fwd("\<down>")
 " add completion chain
 let g:mucomplete#chains = {
       \ 'default' : [
-      \    'ulti',
       \    "c-p",
       \    "c-n",
       \    'tags',
