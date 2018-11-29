@@ -2,12 +2,15 @@
 " COLORSCHEME
 " ******************************************************************************
 
-" the color sheme, dumbass
+" the color scheme
 colorscheme default
 set background=dark
 
 " enable color syntax highlighting
 syntax on
+
+" change comment color
+highlight Comment ctermfg=102
 
 " change the background color of the autocomplete menu
 highlight Pmenu ctermbg=172 gui=bold
