@@ -125,9 +125,6 @@ let &t_EI.="\e[1 q"
 " SEARCH
 " ******************************************************************************
 
-" set line substiution to global by default
-set gdefault
-
 " highlight search matches
 set hlsearch
 
