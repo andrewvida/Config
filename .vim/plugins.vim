@@ -10,17 +10,19 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
-Plug 'godlygeek/tabular', { 'on': 'Tab' }
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'mattn/emmet-vim'
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
@@ -35,8 +37,8 @@ call plug#end()
 " ******************************************************************************
 
 " add sign column emoticons
-let g:ale_sign_warning = "➜"
-let g:ale_sign_error = "✘"
+let g:ale_sign_warning = "\u279c"
+let g:ale_sign_error = "\u2718"
 
 " message format
 let g:ale_echo_msg_format = '[%linter%]: %s ( %severity% )'
@@ -53,6 +55,9 @@ let g:ale_fixers = {
       \  'javascript': [
       \   'eslint',
       \  ],
+      \  'javascript.jsx': [
+      \   'eslint',
+      \  ],
       \  'ruby': [
       \   'rubocop',
       \  ],
@@ -66,6 +71,9 @@ augroup ale_highlights
   autocmd ColorScheme * highlight ALEWarning ctermbg=none cterm=underline
   autocmd ColorScheme * highlight ALEWarningSign ctermfg=208
 augroup end
+
+" ale linting configuration
+let g:ale_lint_on_enter = 0
 
 " ******************************************************************************
 " FZF.VIM
@@ -89,20 +97,19 @@ nnoremap <silent> <Leader>c :Tags<CR>
 " map custom Rg command
 nnoremap <silent> <Leader>r :Rg<CR>
 
-" use ripgrep for search
-command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-    \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \   <bang>0)
-
 " use ripgrep for full-line completion
-inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
-  \ 'prefix': '^.*$',
-  \ 'source': 'rg -n ^ --color always',
-  \ 'options': '--ansi --delimiter : --nth 3..',
-  \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
+inoremap <expr> <c-x><c-h> fzf#vim#complete(fzf#wrap({
+      \ 'prefix': '^.*$',
+      \ 'source': 'rg -n ^ --color always',
+      \ 'options': '--ansi --delimiter : --nth 3..',
+      \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }
+      \ }))
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=? -complete=dir GFiles
+  \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " ******************************************************************************
 " INDENTLINE
@@ -121,20 +128,41 @@ let g:indentLine_fileTypeExclude = ['json', 'sh']
 let g:lightline = {
       \ 'colorscheme': 'default',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \   'left': [['mode', 'paste'], ['branch'], ['relativepath'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ],
+      \   'right': [['lineinfo'], ['percent'], ['modified', 'fileformat', 'fileencoding', 'filetype'] ],
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'branch': 'fugitive#head'
+      \ },
+      \ 'component_expand': {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ },
+      \ 'component_type': {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
       \ },
       \ }
+" ******************************************************************************
+" LIGHTLINE-ALE
+" ******************************************************************************
+
+" set the indicators
+let g:lightline#ale#indicator_ok = "\u2714 "
+let g:lightline#ale#indicator_warnings = "\u279c "
+let g:lightline#ale#indicator_errors = "\u2718 "
+let g:lightline#ale#indicator_checking = "\u29D7 "
 
 " ******************************************************************************
 " MUCOMPLETE
 " ******************************************************************************
 
 " use the global completeopt
-let g:mucomplete#always_use_completeopt = 0
+let g:mucomplete#always_use_completeopt = 1
 
 " cycle with tab instead of selection
 let g:mucomplete#cycle_with_trigger = 1
@@ -145,15 +173,19 @@ imap <expr> <down> mucomplete#extend_fwd("\<down>")
 " add completion chain
 let g:mucomplete#chains = {
       \ 'default' : [
-      \    "c-p",
-      \    "c-n",
+      \    'ulti',
+      \    'list',
       \    'tags',
-      \    'omni',
+      \    'line',
       \    'incl',
       \    'file',
       \    'path',
       \   ],
       \ }
+
+inoremap <silent> <expr> <Plug>MyCr
+      \ mucomplete#ultisnips#expand_snippet("\<cr>")
+imap <cr> <Plug>MyCr
 
 " ******************************************************************************
 " RAINBOW_PARENTHESES
@@ -193,6 +225,19 @@ nnoremap <silent> <F8> :TagbarToggle<CR>
 
 " hide line numbers
 let g:tagbar_show_linenumbers = 0
+
+" ******************************************************************************
+" EMMET
+" ******************************************************************************
+let g:user_emmet_leader_key=','
+
+" ******************************************************************************
+" ULTISNIPS
+" ******************************************************************************
+
+" trigger mappings
+let g:UltiSnipsExpandTrigger       = "<f5>"
+let g:UltiSnipsJumpForwardTrigger  = "<c-b>"
 
 " ******************************************************************************
 " VIM-FUGITIVE
