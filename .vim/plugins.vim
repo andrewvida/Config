@@ -8,6 +8,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
@@ -110,6 +111,19 @@ command! -bang -nargs=? -complete=dir Files
 
 command! -bang -nargs=? -complete=dir GFiles
   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+
+" ******************************************************************************
+" GITGUTTER
+" ******************************************************************************
+
+" Faster updatetime so that GitGutter can update instantly
+set updatetime=100
+
+let g:gitgutter_sign_added = '┃'
+let g:gitgutter_sign_modified = '┃'
+let g:gitgutter_sign_removed = '━'
+let g:gitgutter_sign_modified_removed = '╋━'
 
 " ******************************************************************************
 " INDENTLINE
