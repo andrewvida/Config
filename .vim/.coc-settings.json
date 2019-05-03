@@ -1,0 +1,6 @@
+{
+  "suggest.autoTrigger": "always",
+  "suggest.minTriggerInputLength": 3,
+  "suggest.maxCompleteItemCount": 10,
+  "suggest.timeout": 5000
+}

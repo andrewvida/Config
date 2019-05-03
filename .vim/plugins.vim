@@ -8,12 +8,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-gitgutter'
+Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -21,15 +21,17 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mattn/emmet-vim'
+Plug 'maximbaz/lightline-ale'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
 Plug 'w0rp/ale'
 call plug#end()
 
@@ -64,6 +66,13 @@ let g:ale_fixers = {
       \  ],
       \}
 
+" ale linting configuration
+let g:ale_lint_on_enter = 0
+
+" add sign column emoticons
+let g:ale_sign_warning = "\u279c"
+let g:ale_sign_error = "\u2718"
+
 " ale colors for highlights
 augroup ale_highlights
   autocmd!
@@ -73,8 +82,8 @@ augroup ale_highlights
   autocmd ColorScheme * highlight ALEWarningSign ctermfg=208
 augroup end
 
-" ale linting configuration
-let g:ale_lint_on_enter = 0
+" add a mapping for completion
+imap <C-_> <Plug>(ale_complete)
 
 " ******************************************************************************
 " FZF.VIM
@@ -175,11 +184,11 @@ let g:lightline#ale#indicator_checking = "\u29D7 "
 " MUCOMPLETE
 " ******************************************************************************
 
-" use the global completeopt
-let g:mucomplete#always_use_completeopt = 1
-
 " cycle with tab instead of selection
 let g:mucomplete#cycle_with_trigger = 1
+
+" enables auto-completion while typing
+let g:mucomplete#enable_auto_at_startup = 0
 
 " extend current completion
 imap <expr> <down> mucomplete#extend_fwd("\<down>")
