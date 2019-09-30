@@ -1,0 +1,4 @@
+{
+  "suggest.floatEnable": true,
+  "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "javascript"]
+}
