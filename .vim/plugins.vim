@@ -25,6 +25,7 @@ Plug 'maximbaz/lightline-ale'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
@@ -196,6 +197,8 @@ imap <expr> <down> mucomplete#extend_fwd("\<down>")
 " add completion chain
 let g:mucomplete#chains = {
       \ 'default' : [
+      \    'c-p',
+      \    'c-n',
       \    'ulti',
       \    'list',
       \    'tags',
@@ -209,6 +212,12 @@ let g:mucomplete#chains = {
 inoremap <silent> <expr> <Plug>MyCr
       \ mucomplete#ultisnips#expand_snippet("\<cr>")
 imap <cr> <Plug>MyCr
+
+" ******************************************************************************
+" NERDTREE
+" ******************************************************************************
+
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
 
 " ******************************************************************************
 " RAINBOW_PARENTHESES
