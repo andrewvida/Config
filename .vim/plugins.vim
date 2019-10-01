@@ -23,6 +23,8 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mattn/emmet-vim'
 Plug 'maximbaz/lightline-ale'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree'
