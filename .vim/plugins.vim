@@ -53,6 +53,9 @@ let g:ale_echo_msg_format = '[%linter%]: %s ( %severity% )'
 " autofix
 let g:ale_fix_on_save = 1
 
+" ale linters
+let g:ale_linters = {'ruby': ['standardrb']}
+
 " ale fixers
 let g:ale_fixers = {
       \  '*': [
@@ -66,8 +69,7 @@ let g:ale_fixers = {
       \   'eslint',
       \  ],
       \  'ruby': [
-      \   'standard',
-      \   'rubocop',
+      \   'standardrb',
       \  ],
       \}
 
@@ -267,6 +269,12 @@ let g:tagbar_show_linenumbers = 0
 " ******************************************************************************
 let g:user_emmet_leader_key=','
 
+let g:user_emmet_settings = {
+\  'javascript.jsx' : {
+\      'extends': 'jsx',
+\      'quote_char': "'",
+\  },
+\}
 " ******************************************************************************
 " ULTISNIPS
 " ******************************************************************************
@@ -305,4 +313,10 @@ nnoremap <silent> t<C-a> :noautocmd wa<cr> :TestSuite<CR>
 nnoremap <silent> t<C-l> :noautocmd wa<cr> :TestLast<CR>
 
 " set the default strategy
-let test#strategy = "vimterminal"
+" let test#strategy = "vimterminal"
+let test#strategy = "neovim"
+
+" ******************************************************************************
+" VIM-RUBY
+" ******************************************************************************
+let g:ruby_indent_assignment_style = 'variable'
