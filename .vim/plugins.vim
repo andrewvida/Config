@@ -12,6 +12,7 @@ Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
+Plug 'epilande/vim-react-snippets'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
@@ -24,12 +25,13 @@ Plug 'mattn/emmet-vim'
 Plug 'maximbaz/lightline-ale'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-salve'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
@@ -63,9 +65,11 @@ let g:ale_fixers = {
       \   'trim_whitespace',
       \  ],
       \  'javascript': [
+      \    'prettier',
       \   'eslint',
       \  ],
       \  'javascript.jsx': [
+      \   'prettier',
       \   'eslint',
       \  ],
       \  'ruby': [
@@ -110,6 +114,9 @@ nnoremap <silent> <Leader>l :Lines<CR>
 
 " map Tags command
 nnoremap <silent> <Leader>c :Tags<CR>
+
+" map Snippets command
+nnoremap <silent> <leader>s :Snippets<CR>
 
 " map custom Rg command
 nnoremap <silent> <Leader>r :Rg<CR>
@@ -275,6 +282,14 @@ let g:user_emmet_settings = {
 \      'quote_char': "'",
 \  },
 \}
+
+
+
+" ******************************************************************************
+" PRETTIER (https://prettier.io/docs/en/vim.html)
+" ******************************************************************************
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
 " ******************************************************************************
 " ULTISNIPS
 " ******************************************************************************
@@ -296,11 +311,9 @@ augroup end
 nnoremap <silent> <leader>g :Ggrep <cword><CR>
 
 " ******************************************************************************
-" VIM-JSX
+" VIM-JSX-PRETTY
 " ******************************************************************************
-
-" don't requre the .jsx extension
-let g:jsx_ext_required = 0
+let g:vim_jsx_pretty_colorful_config = 1
 
 " ******************************************************************************
 " VIM-TEST
