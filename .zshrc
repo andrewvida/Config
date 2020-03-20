@@ -78,6 +78,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+eval "$(nodenv init -)"
+
 #tmux
 alias ta='tmux attach -t '
 alias tn='tmux new -s '
