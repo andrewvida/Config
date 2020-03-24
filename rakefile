@@ -9,7 +9,7 @@ end
 
 desc 'Install Homebrew Packages'
 task :install_homebrew_packages do
-  sh 'brew install cmake ctags git ripgrep rbenv reattach-to-user-namespace tmux vim pgweb zsh'
+  sh 'brew install cmake ctags git ripgrep rbenv reattach-to-user-namespace tmux vim pgweb zsh nodenv heroku fzf'
   sh 'brew install vim --with-custom-ruby'
 end
 
