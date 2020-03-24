@@ -48,12 +48,8 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="/usr/local/bin:$PATH"
 
-# Tmuxinator configuration
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 export EDITOR=vim
 
-# Tmuxinator autocompletion
-alias mux=tmuxinator
 
 # Aliases
 alias trash='sudo rm -Rf ~/.Trash/*'
