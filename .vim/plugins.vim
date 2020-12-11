@@ -7,35 +7,41 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" Use ALE and COC.NVIM together
+" https://github.com/dense-analysis/ale#5iii-how-can-i-use-ale-and-cocnvim-together
+let g:ale_disable_lsp = 1
+
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'godlygeek/tabular'
+Plug 'dense-analysis/ale'
 Plug 'epilande/vim-react-snippets'
+Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
-Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mattn/emmet-vim'
 Plug 'maximbaz/lightline-ale'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'sheerun/vim-polyglot'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-salve'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-salve'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'w0rp/ale'
+Plug 'vim-test/vim-test', { 'on': ['TestFile', 'TestNearest', 'TestLast', 'TestSuite'] }
 call plug#end()
 
 " ******************************************************************************
@@ -50,7 +56,7 @@ let g:ale_sign_error = "\u2718"
 let g:ale_echo_msg_format = '[%linter%]: %s ( %severity% )'
 
 " autofix
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 " ale linters
 let g:ale_linters = {'ruby': ['standardrb']}
@@ -130,11 +136,11 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" if exists('*complete_info')
+"   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" else
+"   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" endif
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -175,6 +181,8 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
+let g:coc_global_extensions = ['coc-solargraph']
+
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -188,7 +196,7 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Introduce function text object
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
+xmap af <Plug>(coc-funcobj-af)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
@@ -236,6 +244,15 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>"
 " ******************************************************************************
 " FZF.VIM
 " ******************************************************************************
+""
+" set default FZF options for VIM
+let $FZF_DEFAULT_OPTS='--color=border:#d78700 --border --layout=reverse --margin=1,4'
+
+" configure the popup window
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+
+" configure the preview window
+let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 
 " map Buffers command
 nnoremap <silent> <Leader>b :Buffers<CR>
@@ -300,27 +317,29 @@ let g:indentLine_fileTypeExclude = ['json', 'sh']
 " ******************************************************************************
 
 let g:lightline = {
-      \ 'colorscheme': 'default',
       \ 'active': {
-      \   'left': [['mode', 'paste'], ['branch'], ['relativepath'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ],
-      \   'right': [['lineinfo'], ['percent'], ['modified', 'fileformat', 'fileencoding', 'filetype'] ],
+      \   'left': [['mode', 'paste'], ['branch'], ['relativepath'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]],
+      \   'right': [['lineinfo'], ['percent'], ['modified', 'fileformat', 'fileencoding', 'filetype']],
       \ },
+      \ 'colorscheme': 'onedark',
       \ 'component_function': {
-      \   'branch': 'fugitive#head'
+      \   'branch': 'fugitive#head',
+      \   'completion': 'Completion'
       \ },
       \ 'component_expand': {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
       \ },
       \ 'component_type': {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
+      \   'linter_checking': 'left',
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error',
+      \   'linter_ok': 'left',
       \ },
       \ }
+
 " ******************************************************************************
 " LIGHTLINE-ALE
 " ******************************************************************************
@@ -421,8 +440,7 @@ nnoremap <silent> t<C-a> :noautocmd wa<cr> :TestSuite<CR>
 nnoremap <silent> t<C-l> :noautocmd wa<cr> :TestLast<CR>
 
 " set the default strategy
-" let test#strategy = "vimterminal"
-let test#strategy = "neovim"
+let test#strategy = "dispatch"
 
 " ******************************************************************************
 " VIM-RUBY

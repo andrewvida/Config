@@ -51,16 +51,8 @@ export PATH="/usr/local/bin:$PATH"
 export EDITOR=vim
 
 
-# Aliases
-alias trash='sudo rm -Rf ~/.Trash/*'
-alias speedup='sudo rm -rf /private/var/log/asl/*.asl'
-alias clean_gems='for i in `gem list --no-versions`; do gem uninstall -aIx $i; done'
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-export NVM_DIR="/Users/andrewvida/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Add fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -77,8 +69,8 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 eval "$(nodenv init -)"
 
 #tmux
-alias ta='tmux attach -t '
-alias tn='tmux new -s '
+alias ta='tmux -CC attach -t '
+alias tn='tmux -CC new -s '
 alias tl='tmux ls'
 
 # tmate/tmux pairing helpers
@@ -128,3 +120,5 @@ tmate-unpair() {
     echo "Session already killed"
   fi
 }
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
