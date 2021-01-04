@@ -22,11 +22,15 @@
 [color]
   ui = true
 [core]
-  editor       = /usr/local/bin/vim
+	editor = code --wait
   pager        = less -F -X
   excludesfile = ~/.gitignore-global
 [credential]
   helper = osxkeychain
+[diff]
+    tool = default-difftool
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [heroku]
   account = personal
 [pull]
