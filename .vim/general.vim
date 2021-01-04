@@ -13,10 +13,10 @@ syntax on
 " highlight Comment ctermfg=102
 
 " change the background color of the autocomplete menu
-highlight Pmenu ctermbg=248 gui=bold guibg=cyan
+" highlight Pmenu ctermbg=248 gui=bold guibg=cyan
 
 " change the select backgroud color of the autocomplete menu
-highlight PmenuSel ctermbg=109 gui=bold
+" highlight PmenuSel ctermbg=109 gui=bold
 
 " change the sign column backgroud color
 " highlight SignColumn ctermbg=black
